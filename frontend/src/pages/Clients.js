@@ -46,7 +46,7 @@ function Clients() {
           data-bs-toggle="modal"
           data-bs-target="#addClientModal"
         >
-          + Add Client
+          + Add Client  
         </button>
       </div>
 
@@ -94,7 +94,8 @@ function Clients() {
       <table className="table table-striped mt-3">
         <thead>
           <tr>
-            <th>#</th>
+            <th>Serial No.</th>
+            <th>Client ID</th>
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
@@ -106,6 +107,7 @@ function Clients() {
           {clientsList.map((client, index) => (
             <tr key={client.id}>
               <td>{index + 1}</td>
+              <td>{client.id}</td>
               <td>{client.name}</td>
               <td>{client.email}</td>
               <td>{client.phone}</td>

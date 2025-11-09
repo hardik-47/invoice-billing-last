@@ -7,7 +7,7 @@ import invoiceContext from '../context/invoiceContext';
 function Invoices() {
 
     const context = useContext(invoiceContext);
-    const { invoiceList, addinvoice, getinvoice, delinvoice} = context;
+    const { invoiceList, addinvoice, getinvoice, delinvoice } = context;
 
     const [formData, setFormData] = useState({ clientId: '', dueDate: '', items: [] });
 
@@ -132,6 +132,9 @@ function Invoices() {
                                     <div key={index} className="border p-3 mb-2">
                                         <div className="row g-2">
                                             <div className="col-md-4">
+                                                {/* TODO */}
+                                                <div className="input-group">
+                                                    <span className="input-group-text">Item</span>
                                                 <input
                                                     type="text"
                                                     className="form-control"
@@ -139,8 +142,11 @@ function Invoices() {
                                                     value={item.description}
                                                     onChange={(e) => handleItemChange(index, 'description', e.target.value)}
                                                 />
+                                                </div>
                                             </div>
                                             <div className="col-md-2">
+                                                  <div className="input-group">
+                                                    <span className="input-group-text">Qty</span>
                                                 <input
                                                     type="number"
                                                     className="form-control"
@@ -148,15 +154,26 @@ function Invoices() {
                                                     value={item.quantity}
                                                     onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
                                                 />
+                                                </div>
                                             </div>
-                                            <div className="col-md-3">
-                                                <input
-                                                    type="number"
-                                                    className="form-control"
-                                                    placeholder="Unit Price"
-                                                    value={item.unitPrice}
-                                                    onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
-                                                />
+                                            <div className="col-md-2">
+                                              
+
+                                                {/* The Input Group container */}
+                                                <div className="input-group">
+                                                    {/* The currency symbol prefix */}
+                                                    <span className="input-group-text">₹</span>
+
+                                                    {/* The input field itself */}
+                                                    <input
+                                                        id="Unit_Price"
+                                                        type="number"
+                                                        className="form-control"
+                                                        placeholder="Unit Price"
+                                                        value={item.unitPrice}
+                                                        onChange={(e) => handleItemChange(index, 'unitPrice', e.target.value)}
+                                                    />
+                                                </div>
                                             </div>
                                             <div className="col-md-2 d-flex align-items-center">
                                                 ₹{(item.quantity * item.unitPrice).toFixed(2)}
@@ -229,7 +246,9 @@ function Invoices() {
                             </td>
                             <td>
                                 <button className="btn btn-sm btn-info me-2" onClick={() => navigate(`/invoices/${invoice.id}`)}>View</button>
-                                <button className="btn btn-sm btn-danger" onClick={()=>{delinvoice(invoice.id)}}>Delete</button>
+                                <button className="btn btn-sm btn-danger me-2" onClick={() => { delinvoice(invoice.id) }}>Delete</button>
+                                <button className="btn btn-sm btn-warning ml-2" onClick={() => { delinvoice(invoice.id) }}>Update</button>
+
                             </td>
                         </tr>
                     ))}
